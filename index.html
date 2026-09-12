@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en" data-network="bitcoin" data-theme="sepia">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MONKEDEX — Nodemonkes on Bitcoin</title>
+  <meta name="description" content="Monkedex — a non-custodial marketplace for Nodemonkes on Bitcoin. PSBT-native trades, taproot custody with maker-side recovery, zero custody of your keys.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MONKEDEX">
+  <meta property="og:title" content="MONKEDEX — NODEMONKES DEX ON BITCOIN">
+  <meta property="og:description" content="Non-custodial marketplace for Nodemonkes on Bitcoin — PSBT-native trades, settled on-chain.">
+  <meta property="og:image" content="images/logo.png">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    (function(){
+      var d = document.documentElement;
+      var t = localStorage.getItem('mdx-theme');
+      if (t !== 'light' && t !== 'dark' && t !== 'sepia') t = 'sepia';
+      d.dataset.theme = t;
+    })();
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="#">NODEMONKES<span class="logo-beta">beta</span></a>
+    
+    <nav class="site-nav">
+      <a href="#forsale">FOR SALE</a>
+      <a href="#bids">BIDS</a>
+      <a href="#sales">SALES</a>
+      <a href="#traits">TRAITS</a>
+      <a href="#owners">OWNERS</a>
+      <a href="#explorer">EXPLORER</a>
+      <a href="#watchlist" id="nav-watchlist">WATCHLIST</a>
+    </nav>
+    <form class="search-form" action="#" method="get">
+      <input type="search" name="query" placeholder="id / trait / rank:1 / address …" aria-label="Search">
+      <button type="submit">GO</button>
+    </form>
+    
+   
+    <button id="theme-toggle" class="theme-btn" title="cycle theme" aria-label="Cycle theme">▩</button>
+    <button id="lang-toggle" class="theme-btn" title="switch language" data-lang="zh-CN">EN</button>
+  </div>
+</header>
+
+<main class="site-main">
+
+<section class="hero panel">
+  <h1>NODEMONKES</h1>
+  <p>The Nodemonkes are <a href="#rarity">10,000</a> unique collectible monkes — each one a
+    28×28-pixel character written directly onto the Bitcoin blockchain in February 2023 as
+    ordinals inscriptions
+    <a href="#search">#83,522</a>–<a href="#search">#111,319</a>,
+    making them among the first 10k profile-picture collections to live entirely on-chain.
+    There are no servers and no separate image files: every monke is part of Bitcoin itself,
+    as permanent as the chain that carries it. They are the work of two pseudonymous artists,
+    Nodetoshi and Monketoshi, who drew on Bitcoin's technology and economics, the ordinals
+    protocol, libertarian values, and the wider culture of digital art and NFTs.</p>
+  
+  <div class="hero-actions">
+    <button type="button" id="hero-connect-btn" class="btn">CONNECT WALLET</button>
+    <button type="button" id="hero-migrate-btn" class="btn btn-ghost">Claim MONKES</button>
+  </div>
+  
+  <div class="monke-grid mini lore-band no-ring" style="--cols: 14">
+    <a class="monke-tile" href="#monke-5682" data-monke-id="5682" title="Monke #5682 — rank 9482">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAlUlEQVR42u3UwQ1AMBTG8S5gAWcLSBcwiqF6M4odmESM8PQinuJ9pI1qVPK/qPSXPFQRkXozlcGooL3ITWtNwcEziINraYIS5oJ30J+C0oYI5GvfBXm1fYTXVKWY9zt0wXkwYsFBKrZ247u6j8BpNMSLDqKRohEfwL5riRcddNdR3h9NBoODqMc/PtoQHW3oqMtg+uACoQZHLfT6Tp0AAAAASUVORK5CYII=" alt="Monke #5682" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-4107" data-monke-id="4107" title="Monke #4107 — rank 6908">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAkElEQVR42u3UvQmAMBCG4dvHpRwqnYMIiq2lThK0t/i0UeJBPGJ+jJDA2yj44CWEAFDKqIDJwWPBpeDguZKBEhptpDb0/3/IMXNFHenbU5sfOA4tzLDq53xHysGqI6fyA/WsYMbB2/5suLI99waXSTklgn1Tw+xzkL+X8j40BQwOSjnfNOIHpatNuOoK+H9wB6FHqaigU5e4AAAAAElFTkSuQmCC" alt="Monke #4107" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-9691" data-monke-id="9691" title="Monke #9691 — rank 678">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAi0lEQVR42u2TYQqAIAxGh0LQ/a8RdKvOUPRjFTQcmlo4pWLCQ5ji49sQEBFaAipUobjQwogH/xOSKATRnFi2E1WEPkZCGBeHMp64utBKtZSYB0DOOvVJxIV88YuJeplwQUe33yBi9fKE4ABGtC49Q//8YgQqfLmw+j9sLrzTtkfC3OO5hLnEKvy+cAO7paRaCrxlgwAAAABJRU5ErkJggg==" alt="Monke #9691" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-174" data-monke-id="174" title="Monke #174 — rank 8534">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAl0lEQVR42mP4//8/Az0xw6iFoxZS3cJahs3/kfEchvt4MU0tvJr2HwUPHwuxWUTTIMVnIaE4pXqiodhCBiXW/8hYwEsdL6Y4SNEtBOkgBQ8+C9+en/IfGaNbiAwYgNphGBmwsbDCMcUWvj83hSRM0MLdsxP+I+MBtxBdnhCmONGMWkh1CwlhkksaQgYSKtoIFXWjFg59CwEPqtGdASZT4AAAAABJRU5ErkJggg==" alt="Monke #174" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-9211" data-monke-id="9211" title="Monke #9211 — rank 1252">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAcUlEQVR42mP4//8/Az0xw6iFoxYOTQsZeIEEFkyuOqJ8SMgwciwjKkiJtZBqcTjgFhLCw8BCBtLw0LMQGTAAtcMwMmBjYYVjii18f24KSXjoWbh7dgJJeNTCwWch1UsaUi0g1QEj2EJ0gEscFxg0PgQAuW9WomG2xKYAAAAASUVORK5CYII=" alt="Monke #9211" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-9869" data-monke-id="9869" title="Monke #9869 — rank 8998">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAmElEQVR42u2Uyw2AIBAFIbEJo11QJz1YClT21ANmQwzrsoIe2GQuEBgePwPA9MQM4edCay26CxPdtrSZcFk35JwjOKqEtTJO+h/h3SV5gvrSSFOqhUdBglo4T4AGtZBWSsW0l4UhBFCaJ8yF+RnFGEWwQu89KJ8L834O9bMYwteFzrki4p+G+7rIxFdJFiBOJKkq4UgoTbgDdKvpfKj8GsEAAAAASUVORK5CYII=" alt="Monke #9869" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-8599" data-monke-id="8599" title="Monke #8599 — rank 6695">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAzklEQVR42mP4//8/Az0xw6iFw9/CQEPh/8gYXX5xkvp/EF6UpArGdLUQRFPdQnSM7DuyLET3CTEWImNc5gw+C3EZSKr84LMQHQuwhfxHxmoiU/FiilMpuoX8/Bn/rfhL/5cILP6/Xuj8/zvC7/9/FQWqVP39/7/pi////S7+/x+86v9///7//33q/g8+C9+en/IfGQ+4he/PTSEJE7Rw9+yE/8h4wC1ElyeEKU40oxZS3UJCmJySBicgsmhDB/gtJOQDQhYSKltHfUh1HwIAe+sMdG4Qj+sAAAAASUVORK5CYII=" alt="Monke #8599" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-4177" data-monke-id="4177" title="Monke #4177 — rank 9124">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAyElEQVR42mP4//8/Az0xw6iFI8vC75kM/7Fhqlt42p/hPwjjspAUiwefhTDLiLGQGEsJWrjInOE/KZgiC0EGwHwHYv/MgGAQG+YjGBtZnCILz/hBMD4LkcVBNEVBqkRl8B8ZB8el48UUxyG6he/PTcGLqW4hA1ALgybDf8Z4RjAbRuMSJ2jh2/NT/iNjvBbOZYBgdAuRxCm2kFCQEgpiDAt3z074j4wH3EJ0eUKY4kQzaiHVLSSESc74hAwkVLQRKupGLRz6FgIAN4jzcPMXe1kAAAAASUVORK5CYII=" alt="Monke #4177" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-7810" data-monke-id="7810" title="Monke #7810 — rank 3536">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAm0lEQVR42mP4//8/Az0xw6iFoxZS3cJlQCXI+B0a/n+CEYzhfFpaiGwZnB71IbkWLiMSD34LBdhC/iNjNZGpeDHFQYpuIQNQCymYKhZKsvwHYxiA8dHFiLLw7fkp/5ExzX1IyML356aQhAlauHt2wn9kPOAWossTwhQnmlELqW4hIUxOSYMTEFm0oQP8FhLyASELCZWtoz6kug8Bxf0CdPUzSVEAAAAASUVORK5CYII=" alt="Monke #7810" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-2697" data-monke-id="2697" title="Monke #2697 — rank 1176">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAA00lEQVR42mP4//8/Az0xw6iFoxaOHAuBAET8p7mFMItoZiG6BVS3kJAFQ9/CrbuU/yvM0IBjzYPGeDHFFiJbBsJsLKz/35+bgpcG6YPRZFnIWpEKxzuBoqRgghaCXImMkS0DYWQA8gUM4xEn3ULuikNwjC5PCBO0cPfshP/IGNkymloIAk+fPoVbJKIwH4zRHUQIE51oQJaBAMwimlsIwzCL6rjngTHNLYRZNGAWEsIklzSEDFzAdxKMP/F6E4WJtnAflzVWTKxFRFuIy6JRC4m1EAA2hT8OkWMaWQAAAABJRU5ErkJggg==" alt="Monke #2697" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-9955" data-monke-id="9955" title="Monke #9955 — rank 3119">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAoUlEQVR42mP4//8/Az0xw6iFA26hvLz8f3yYYgt3p3H+R8YYFrQwgDHVLASC/8gYl2VwmpYW0sSH+IJ0ePgQl4Xo4rgw1YKUZhYy8AIJEjDFQSrJ8v8/JZhiC5EBLNgIiOO38O35Kf+RMc19iG4hehy9PzeFJEzQwt2zE/4j4wG3EF2eEKY4W4xaSHULqV7SkGoBqQ4YwRaiA1ziuMCg8SEAHbT0+qQ+SGcAAAAASUVORK5CYII=" alt="Monke #9955" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-800" data-monke-id="800" title="Monke #800 — rank 8845">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAo0lEQVR42u3VzQ2AIAwG0LKpQ3lzBxdwAhOiU3A0jlDlYghIy59oDCTfxUQflIKAiFAz0MAGFgOllGgmYZQF5xGuVAc9aNoeUrAHzGsaG4TzlZh8H7Q3RghBJruk9gf3pSdTHPStlnhOg9vao5nXQa6kXIkdcBo6NFMN1EMp5YD2hLgEN43G7o7BY6CvS/8PcjdP9MEPuLo4kPxNNRALTOBd8AAbrk0hpKYBwQAAAABJRU5ErkJggg==" alt="Monke #800" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-4653" data-monke-id="4653" title="Monke #4653 — rank 6775">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAmklEQVR42u3UwQ1AMBTG8SfOprOAxEpuzGABE0gaJjCC6AYfF9JUeKnXFEkl/1Ojv0T1EQAKGUUwgt5ApRTMHjx+wb6lo+DgBfrsDO/gC1D209ggba+49H2wpARmTZreJv6kWmtIEoPI6NS+luTTKRacxwpmwUH7DJehcooFu7qA2eugvc4lvhYR9A5yOU8abkNutHGjLoL/B1cFFEEryN9xTQAAAABJRU5ErkJggg==" alt="Monke #4653" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-6550" data-monke-id="6550" title="Monke #6550 — rank 1548">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAA0UlEQVR42mP4//8/Az0xw6iFA2phRETE/9mzZ4MxCEDpUQsps1BTU/P/mTNn/oPYIHr4+JCRkfE/Ljy0LWRgWvqfFDz0LeTnz/hvxV/6v0Rg8f/1Quf/3xF+//+rKFCl6u///01f/P/vd/H//+BV///79///71P3f/BZ+Pb8lP/IeMAtfH9uCkmYoIW7Zyf8R8Z0t1B+5UoUjC5PCJOcaEYtpLmFhDDJJQ1GcQVUQhImUNRRXHaSWraSbCHYBNJoyiy8/LyNJD5VghRmKDE0uvkA/JI5oB34Ct0AAAAASUVORK5CYII=" alt="Monke #6550" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-3603" data-monke-id="3603" title="Monke #3603 — rank 6152">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAsUlEQVR42u3TzQ2AIAwG0I7hBq7CzTncgwWcgXFcgAWYwWO1KkoqIho0wWDyHSSQx08LiAhfBgpYwORg3wBS/gdaiGdow8kHPIP/BwohkCKlnKOUCiY5qLUOJjkI05I5Vbekxn3MMx4Fuju20GsgTfSB9qT2ra6u9uyKj+C0O7cIXgcpa7WhMWaDOBib6KIhjL67bfEYfNqH+YG8Lfib8txu/KsicXFf+7j/UVVawOzAEY4+pdyQHyiWAAAAAElFTkSuQmCC" alt="Monke #3603" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-5881" data-monke-id="5881" title="Monke #5881 — rank 6159">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAhklEQVR42mP4//8/Az0xw6iFoxaOWjhqIU5sY2PznxCmioXIBloyef2vElmGF5Ntoaam5n8QprmFMItwWcgA1MIA1oYJYHLImGoW4rKY5hYS8i3FFr4/N4UkPPQs3D07gSQ8aiH9LSRUtBHCVC1pQDg3NxeMcRVtMH0wdaMWEm0hsXjALQQAW979EiePUvAAAAAASUVORK5CYII=" alt="Monke #5881" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-2202" data-monke-id="2202" title="Monke #2202 — rank 9190">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAnElEQVR42u2UbQqAIAxAjS4adCX/1U26Q53Cn9ERVosgTeYqY5U4eIIiPjc/FAAoSVQWJi2kQiRDOeES2Oy2rU/xP+E65QoxQi6bO1l+S4jUqgCbtiyDRJ/hUTj1OsjjQudBumWkxsPCcdBg87qQKylXYk/YNRXYiAkxjDGe8LghjtOXBmUYYkLqlqYv5Lj88LkFua+N++qy8P/CGSHJzf001k7bAAAAAElFTkSuQmCC" alt="Monke #2202" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-4017" data-monke-id="4017" title="Monke #4017 — rank 6708">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAfklEQVR42mP4//8/Az0xw6iF8itX/icFj1o4+CxkYFr6nxQ8auGohQNv4ftzU/BiqluIDBiA2mEYj/gQs5BQkBIK4sFnIXpZuXt2Akl41MLBZyHV60OM4gopTxGFCRR1FJedpJatJFsINoE0mjILLz9vI4lPlSCFGUoMjW4+AB/fAaoW2l9iAAAAAElFTkSuQmCC" alt="Monke #4017" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-7184" data-monke-id="7184" title="Monke #7184 — rank 1916">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAjklEQVR42mP4//8/Az0xw6iFoxZSzcIzZ878R8ZkAOpaeHIdAxzT3UIclpIXh/gsxmEhZYkG3UIGoBZS8OC30ENV4D8pmOIgxTAQpAWK2YAUDOMUp9zCD3DMz88PxzjFCVlYbinxHxkPuIXo8tgwSXE4/C0klGhGLaS6heSWMDgtJGQwMT7E59tRC4e+hQAVV8p0bKBtfwAAAABJRU5ErkJggg==" alt="Monke #7184" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-9747" data-monke-id="9747" title="Monke #9747 — rank 9299">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAnUlEQVR42mP4//8/Az0xw6iFI8vC75kM/7Fhqlt42p/hPwjjspAUiwefhTDLiLGQGEsJWrjInOE/KZgiC0EGwHwHYv/MgGAQG+YjGBtZnCILz/hBMD4LkcVBNEVBKlTG+J8UTHEcohuovYsBL6a6hQxALTD8//d/OMYlPvQsfAfUQgoetXDUQvpbSPWMLy2z4D8+DNJBCh61cPhZCADJKsiuWPS2/QAAAABJRU5ErkJggg==" alt="Monke #9747" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-30" data-monke-id="30" title="Monke #30 — rank 4835">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAzElEQVR42mP4//8/Az0xw6iFw9/CQEPh/8gYXX5xkvp/EF6UpArGdLUQRFPdQnSM7DuyLET3CTEWImNc5gw+C3EZSKr84LMQQwHT0v+kYIpTKbqB789NwYupbiEDUAsDR8V/Bu5FEDaMxiFO0MK356f8R8b4LGQW+A/G6BYii1NsIaEgJRTEGBbunp3wHxnT3UL5lStRMLo8IUxyohm1kOYWEsIkZ3ys+Y4UTKCoo7jsJLVsJdlCsAmk0ZRZePl5G0l8qgQpzFBiaHTzAc6022JCpx8uAAAAAElFTkSuQmCC" alt="Monke #30" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-7509" data-monke-id="7509" title="Monke #7509 — rank 5585">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAwklEQVR42mP4//8/Az0xw6iFoxZS3cJahs3/kfEchvt4MU0tvJr2HwUPHwuxWUTTIMVnIaE4pXqiodhCeQe5/+9WLIVj5XBlvJjiIAVZmCDHCcfvz03Bi6luITJgAGqHYTzi+C2EBR3MApCFyJjuFhIKUkJBjGHh7tkJ/5HxgFkI8jWIhonDQgBdPTomK9HQ1UIYhsXn8LMQPdEQwiRnfOQ4w5Y9YEUYOp/Yom7oWEgsJtpCXJiQD9EdSjULcWFCFgIAFj4ah1YHJlIAAAAASUVORK5CYII=" alt="Monke #7509" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-2767" data-monke-id="2767" title="Monke #2767 — rank 2267">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAA+klEQVR42mP4//8/Az0xw6Cy8P25Kf8JYapauHt2wn8QBhmMi031IA00FP4Pw4uSVFEwTeIQ3RIQhjlgeFiIL0ix4aFnITGWUM1CZN+RgoeOhWAFTEv/k4IpjkN0A1kYGP/PXb0HohWIQWyQGLFFHVkWtk1b938tBz8Yg9ggsR//v2DFBC18e37Kf2SMzcKS5jn/o/nlwBjEprmFSfldYBqZTWxtgrOGgGF0C4mpssiyEASePn36X37lShSM7iBCmOhEA7IMBOhmIQyPPAsJYZIzPkZxBVRCEiZQ1FFcdpJatpJsIdgE0mjKLLz8vI0kPlWCFGYoMTS6+QAbNgohNEw6LAAAAABJRU5ErkJggg==" alt="Monke #2767" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-6911" data-monke-id="6911" title="Monke #6911 — rank 3657">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAtUlEQVR42mP4//8/Az0xw6iFI8vC75kM/7Fhqlt42p/hPwjjspAUiwefhTDLiLGQGEsJWrjInOE/KZgiC0EGwHwHYv/MgGAQG+YjGBtZnCILz/hBMD4LkcVBNEVBysALJEjAFMchuoHvz03Bi6lu4X9eBjhmYEBgnOKELHx7fsp/ZDzgFhIKUkJBjGHh7tkJ/5HxgFuILk8IU5xoRi2kuoVUL2lItYBUB4xgC9EBLnFcYND4EADLU0ZvlUzozAAAAABJRU5ErkJggg==" alt="Monke #6911" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-1978" data-monke-id="1978" title="Monke #1978 — rank 5766">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAzUlEQVR42mP4//8/Az0xw6iFg85CBl4ggQVTzUJcFlBsIQPnpv9Y8aiFlMYhEICI/zBAiE9xKiXWQlyYahYSi0m2UEnL4D8yDo5Lx4spDlJ0C/n5M/5b8Zf+LxFY/H+90Pn/d4Tf//8qClSp+vv/f9MX///7Xfz/P3jV///+/f//+9T9H3wWvj0/5T8yHnAL35+bQhImaOHu2Qn/kTHdLASBp0+fYliI7iBCmOhEA7IMBOhmIa5UOvwtJIRJLmkIGUioaCNU1I1aOPQtBABAVdvTn68/4wAAAABJRU5ErkJggg==" alt="Monke #1978" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-8517" data-monke-id="8517" title="Monke #8517 — rank 7005">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAi0lEQVR42u3TTQqAIBCG4ekKrYRauW3h7TpP5+hQXaDFl7MwIsoclOhnFi+IqA8oEgC6M1LwX6BzDkcVB6214M5ACfw8MGApYAp6CRpjICkL5APIL+Ek4/eAXN1XkJT9hvsDu5GiFQfD9WHGWnSuFLgFYnPZ4OS3SFJQwfvB4h+/aQfE4h2SFPweuACUv4AdVe1D2gAAAABJRU5ErkJggg==" alt="Monke #8517" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-4396" data-monke-id="4396" title="Monke #4396 — rank 5222">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAA+klEQVR42u2UMQ7CMAwA3efwgr4CeAKM8IxuPKAb6sIzYGYCwUsQI2IyJFVakyZx0kQFAcMpriv5FCcxICIMCfyFvyW8LQFNJBcepoACmzBE/HlCJfMR+khZ4SYHDCFKKAqo3Yn4vqgRsdqRimk+Snic1LiENC/WqJZuVzlSsAAJQAvuxy2xZygkTeGn6HoqnSQXyngEmM0yGavVlmeFl3OJFL2lL4UrqNGFJB8t5FrKtbgj3K3nSKEX5S1C/T9Hr0szuFBdiu8VmiaNldCHrwuoyDjKbBSe71BvoUtIJ1ByYSMmRZ1CyzBnn4H+zQk7uT5nSHfMnSMnfAC2WE09KIoZ+AAAAABJRU5ErkJggg==" alt="Monke #4396" width="28" height="28">
+    </a>
+    <a class="monke-tile" href="#monke-2443" data-monke-id="2443" title="Monke #2443 — rank 7355">
+      <img class="msprite inline-tile" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAAn0lEQVR42u2U2w2AIAwAGYNvFuCDSRyMnWAQZ6lCxBBUSoWIRppcQoD0KC8GAOxJ2BD+SyilhDOaC4UQ4LgSUsTvEwZZibBEigo550ChSugSsHWKg9L+jtBP2JKVUn2GaUJrbZbmwmk2nhBYPyo0xkBMdyG2pdgWH4Raa4jpLkzHMaovzRA2FyqlspAfPvZ1RYn3oCyAXBElbglHhdQKF/+ezds2GKybAAAAAElFTkSuQmCC" alt="Monke #2443" width="28" height="28">
+    </a>
+  </div>
+
+  <p>Within the strict 28×28 grid the variation is endless — no two monkes share the same
+    combination of body, traits and colors. Monkedex is a non-custodial marketplace for
+    them: every trade is a wallet-signed PSBT settled on-chain, custody outputs always keep
+    a maker-side recovery path, and this site never holds your keys or your monkes.
+    <a href="#dex">Read the trust model.</a></p>
+
+  <div class="stats-strip">
+    <div class="stat">
+      <span class="stat-label"><a href="#monke-1227">current lowest<br>price monke</a></span>
+      <div class="stat-body">
+        <span class="stat-value"><a href="#monke-1227">0.0285 BTC</a><span class="stat-usd">$2,198</span></span>
+      </div>
+    </div>
+    <div class="stat">
+      <span class="stat-label"><a href="#forsale">for sale<br>monkes</a></span>
+      <div class="stat-body"><span class="stat-value"><a href="#forsale">45</a></span></div>
+    </div>
+    <div class="stat stat-bids">
+      <span class="stat-label"><a href="#bids">collection bid</a></span>
+      <div class="stat-body">
+        <span class="stat-value"><a href="#bids">0.0285 BTC</a><span class="stat-usd">$2,198</span></span>
+        <span class="stat-vlabel"><a href="#bids">total bid volume</a></span>
+        <span class="stat-value"><a href="#bids">0.3835 BTC</a><span class="stat-usd">$30K</span></span>
+      </div>
+    </div>
+    <div class="stat">
+      <span class="stat-label"><a href="#sales">sales<br>(12 months)</a></span>
+      <div class="stat-body"><span class="stat-value"><a href="#sales">3692</a></span></div>
+    </div>
+    <div class="stat">
+      <span class="stat-label">total value of<br>all sales</span>
+      <div class="stat-body"><span class="stat-value">6,522 BTC<span class="stat-usd">$503.0M</span></span></div>
+    </div>
+    <div class="stat">
+      <span class="stat-label">recent sales</span>
+      <div class="stat-body">
+        <span class="stat-vlabel">24h:</span>
+        <span class="stat-value">0.2691 BTC <span class="stat-vusd">($21K)</span></span>
+        <span class="stat-vlabel">7d:</span>
+        <span class="stat-value">1.08 BTC <span class="stat-vusd">($83K)</span></span>
+        <span class="stat-vlabel">30d:</span>
+        <span class="stat-value">6.03 BTC <span class="stat-vusd">($465K)</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="highest-sales">
+  <h2>HIGHEST SALES</h2>
+  <div class="monke-grid band no-ring" style="--cols: 8">
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-2769" data-monke-id="2769" title="Monke #2769 — rank 57">
+        <span class="msprite" style="--col:68;--row:27" role="img" aria-label="Monke #2769"></span>
+        <span class="tile-corner">1</span>
+      </a>
+      <div class="tile-caption dim">Mar 4, 2024</div>
+      <div class="tile-caption">16.66 BTC</div>
+      <div class="tile-caption tile-usd">$1.3M</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-9255" data-monke-id="9255" title="Monke #9255 — rank 15">
+        <span class="msprite" style="--col:54;--row:92" role="img" aria-label="Monke #9255"></span>
+        <span class="tile-corner">2</span>
+      </a>
+      <div class="tile-caption dim">Mar 3, 2024</div>
+      <div class="tile-caption">10.55 BTC</div>
+      <div class="tile-caption tile-usd">$813K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-5605" data-monke-id="5605" title="Monke #5605 — rank 67">
+        <span class="msprite" style="--col:4;--row:56" role="img" aria-label="Monke #5605"></span>
+        <span class="tile-corner">3</span>
+      </a>
+      <div class="tile-caption dim">Mar 3, 2024</div>
+      <div class="tile-caption">9.95 BTC</div>
+      <div class="tile-caption tile-usd">$767K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-3315" data-monke-id="3315" title="Monke #3315 — rank 75">
+        <span class="msprite" style="--col:14;--row:33" role="img" aria-label="Monke #3315"></span>
+        <span class="tile-corner">4</span>
+      </a>
+      <div class="tile-caption dim">Mar 3, 2024</div>
+      <div class="tile-caption">9.18 BTC</div>
+      <div class="tile-caption tile-usd">$708K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-10" data-monke-id="10" title="Monke #10 — rank 11">
+        <span class="msprite" style="--col:9;--row:0" role="img" aria-label="Monke #10"></span>
+        <span class="tile-corner">5</span>
+      </a>
+      <div class="tile-caption dim">Mar 3, 2024</div>
+      <div class="tile-caption">8.84 BTC</div>
+      <div class="tile-caption tile-usd">$681K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-3361" data-monke-id="3361" title="Monke #3361 — rank 3">
+        <span class="msprite" style="--col:60;--row:33" role="img" aria-label="Monke #3361"></span>
+        <span class="tile-corner">6</span>
+      </a>
+      <div class="tile-caption dim">Mar 4, 2024</div>
+      <div class="tile-caption">8.82 BTC</div>
+      <div class="tile-caption tile-usd">$680K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-4791" data-monke-id="4791" title="Monke #4791 — rank 74">
+        <span class="msprite" style="--col:90;--row:47" role="img" aria-label="Monke #4791"></span>
+        <span class="tile-corner">7</span>
+      </a>
+      <div class="tile-caption dim">Mar 3, 2024</div>
+      <div class="tile-caption">8.71 BTC</div>
+      <div class="tile-caption tile-usd">$671K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-8183" data-monke-id="8183" title="Monke #8183 — rank 12">
+        <span class="msprite" style="--col:82;--row:81" role="img" aria-label="Monke #8183"></span>
+        <span class="tile-corner">8</span>
+      </a>
+      <div class="tile-caption dim">Mar 3, 2024</div>
+      <div class="tile-caption">5.97 BTC</div>
+      <div class="tile-caption tile-usd">$460K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-9553" data-monke-id="9553" title="Monke #9553 — rank 61">
+        <span class="msprite" style="--col:52;--row:95" role="img" aria-label="Monke #9553"></span>
+        <span class="tile-corner">9</span>
+      </a>
+      <div class="tile-caption dim">Mar 5, 2024</div>
+      <div class="tile-caption">4.48 BTC</div>
+      <div class="tile-caption tile-usd">$345K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-1" data-monke-id="1" title="Monke #1 — rank 3188">
+        <span class="msprite" style="--col:0;--row:0" role="img" aria-label="Monke #1"></span>
+        <span class="tile-corner">10</span>
+      </a>
+      <div class="tile-caption dim">Mar 4, 2024</div>
+      <div class="tile-caption">4.19 BTC</div>
+      <div class="tile-caption tile-usd">$323K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-1603" data-monke-id="1603" title="Monke #1603 — rank 14">
+        <span class="msprite" style="--col:2;--row:16" role="img" aria-label="Monke #1603"></span>
+        <span class="tile-corner">11</span>
+      </a>
+      <div class="tile-caption dim">Mar 3, 2024</div>
+      <div class="tile-caption">3.86 BTC</div>
+      <div class="tile-caption tile-usd">$298K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile bid" href="#monke-9293" data-monke-id="9293" title="Monke #9293 — rank 13">
+        <span class="msprite" style="--col:92;--row:92" role="img" aria-label="Monke #9293"></span>
+        <span class="tile-corner">12</span>
+      </a>
+      <div class="tile-caption dim">Mar 2, 2024</div>
+      <div class="tile-caption">3.78 BTC</div>
+      <div class="tile-caption tile-usd">$292K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-5141" data-monke-id="5141" title="Monke #5141 — rank 49">
+        <span class="msprite" style="--col:40;--row:51" role="img" aria-label="Monke #5141"></span>
+        <span class="tile-corner">13</span>
+      </a>
+      <div class="tile-caption dim">Mar 9, 2024</div>
+      <div class="tile-caption">3.19 BTC</div>
+      <div class="tile-caption tile-usd">$246K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-2157" data-monke-id="2157" title="Monke #2157 — rank 455">
+        <span class="msprite" style="--col:56;--row:21" role="img" aria-label="Monke #2157"></span>
+        <span class="tile-corner">14</span>
+      </a>
+      <div class="tile-caption dim">Mar 4, 2024</div>
+      <div class="tile-caption">3.13 BTC</div>
+      <div class="tile-caption tile-usd">$242K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-7008" data-monke-id="7008" title="Monke #7008 — rank 34">
+        <span class="msprite" style="--col:7;--row:70" role="img" aria-label="Monke #7008"></span>
+        <span class="tile-corner">15</span>
+      </a>
+      <div class="tile-caption dim">Jan 3, 2024</div>
+      <div class="tile-caption">2.98 BTC</div>
+      <div class="tile-caption tile-usd">$230K</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-2769" data-monke-id="2769" title="Monke #2769 — rank 57">
+        <span class="msprite" style="--col:68;--row:27" role="img" aria-label="Monke #2769"></span>
+        <span class="tile-corner">16</span>
+      </a>
+      <div class="tile-caption dim">Dec 31, 2023</div>
+      <div class="tile-caption">2.98 BTC</div>
+      <div class="tile-caption tile-usd">$230K</div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="forsale">
+  <h2><a href="#forsale">FOR SALE</a> <span class="dim">(45)</span></h2>
+  <p>The lowest price monke currently for sale is 0.0285 BTC ($2,198).
+    Showing most recent offers, <a href="#forsale">click here to see all 45</a>.</p>
+  <div class="monke-grid mini">
+    <a class="monke-tile sale" href="#monke-1227" data-monke-id="1227" title="Monke #1227 — rank 6111"><span class="msprite" style="--col:26;--row:12"></span></a>
+    <a class="monke-tile sale" href="#monke-5874" data-monke-id="5874" title="Monke #5874 — rank 3019"><span class="msprite" style="--col:73;--row:58"></span></a>
+    <a class="monke-tile sale" href="#monke-7246" data-monke-id="7246" title="Monke #7246 — rank 9408"><span class="msprite" style="--col:45;--row:72"></span></a>
+    <a class="monke-tile sale" href="#monke-7640" data-monke-id="7640" title="Monke #7640 — rank 7146"><span class="msprite" style="--col:39;--row:76"></span></a>
+    <a class="monke-tile sale" href="#monke-8530" data-monke-id="8530" title="Monke #8530 — rank 7007"><span class="msprite" style="--col:29;--row:85"></span></a>
+    <a class="monke-tile sale" href="#monke-9890" data-monke-id="9890" title="Monke #9890 — rank 8554"><span class="msprite" style="--col:89;--row:98"></span></a>
+    <a class="monke-tile sale" href="#monke-241" data-monke-id="241" title="Monke #241 — rank 6352"><span class="msprite" style="--col:40;--row:2"></span></a>
+    <a class="monke-tile sale" href="#monke-1134" data-monke-id="1134" title="Monke #1134 — rank 2878"><span class="msprite" style="--col:33;--row:11"></span></a>
+    <a class="monke-tile sale" href="#monke-4669" data-monke-id="4669" title="Monke #4669 — rank 5041"><span class="msprite" style="--col:68;--row:46"></span></a>
+    <a class="monke-tile sale" href="#monke-5278" data-monke-id="5278" title="Monke #5278 — rank 4582"><span class="msprite" style="--col:77;--row:52"></span></a>
+    <a class="monke-tile sale" href="#monke-2921" data-monke-id="2921" title="Monke #2921 — rank 3709"><span class="msprite" style="--col:20;--row:29"></span></a>
+    <a class="monke-tile sale" href="#monke-9369" data-monke-id="9369" title="Monke #9369 — rank 8239"><span class="msprite" style="--col:68;--row:93"></span></a>
+    <a class="monke-tile sale" href="#monke-9709" data-monke-id="9709" title="Monke #9709 — rank 3282"><span class="msprite" style="--col:8;--row:97"></span></a>
+    <a class="monke-tile sale" href="#monke-1025" data-monke-id="1025" title="Monke #1025 — rank 4926"><span class="msprite" style="--col:24;--row:10"></span></a>
+    <a class="monke-tile sale" href="#monke-3571" data-monke-id="3571" title="Monke #3571 — rank 3970"><span class="msprite" style="--col:70;--row:35"></span></a>
+    <a class="monke-tile sale" href="#monke-7971" data-monke-id="7971" title="Monke #7971 — rank 3867"><span class="msprite" style="--col:70;--row:79"></span></a>
+    <a class="monke-tile sale" href="#monke-3330" data-monke-id="3330" title="Monke #3330 — rank 1906"><span class="msprite" style="--col:29;--row:33"></span></a>
+    <a class="monke-tile sale" href="#monke-7696" data-monke-id="7696" title="Monke #7696 — rank 7774"><span class="msprite" style="--col:95;--row:76"></span></a>
+    <a class="monke-tile sale" href="#monke-7513" data-monke-id="7513" title="Monke #7513 — rank 9127"><span class="msprite" style="--col:12;--row:75"></span></a>
+    <a class="monke-tile sale" href="#monke-7985" data-monke-id="7985" title="Monke #7985 — rank 1095"><span class="msprite" style="--col:84;--row:79"></span></a>
+    <a class="monke-tile sale" href="#monke-2377" data-monke-id="2377" title="Monke #2377 — rank 8000"><span class="msprite" style="--col:76;--row:23"></span></a>
+    <a class="monke-tile sale" href="#monke-5309" data-monke-id="5309" title="Monke #5309 — rank 2686"><span class="msprite" style="--col:8;--row:53"></span></a>
+    <a class="monke-tile sale" href="#monke-4210" data-monke-id="4210" title="Monke #4210 — rank 3286"><span class="msprite" style="--col:9;--row:42"></span></a>
+    <a class="monke-tile sale" href="#monke-6593" data-monke-id="6593" title="Monke #6593 — rank 219"><span class="msprite" style="--col:92;--row:65"></span></a>
+  </div>
+  
+  <div class="grid-legend">
+    <span><span class="legend-chip none"></span>NOT LISTED</span>
+    <span><span class="legend-chip sale"></span>FOR SALE</span>
+    <span><span class="legend-chip bid"></span>HAS BID</span>
+    <span><span class="legend-chip auction"></span>LIVE AUCTION</span>
+  </div>
+</section>
+
+<section class="panel" id="bids">
+  <h2><a href="#bids">BIDS</a> <span class="dim">(11)</span></h2>
+  <div class="monke-grid mini">
+    <a class="monke-tile bid" href="#monke-9547" data-monke-id="9547" title="Monke #9547 — rank 93"><span class="msprite" style="--col:46;--row:95"></span></a>
+    <a class="monke-tile bid" href="#monke-5141" data-monke-id="5141" title="Monke #5141 — rank 49"><span class="msprite" style="--col:40;--row:51"></span></a>
+    <a class="monke-tile bid" href="#monke-9379" data-monke-id="9379" title="Monke #9379 — rank 98"><span class="msprite" style="--col:78;--row:93"></span></a>
+    <a class="monke-tile bid" href="#monke-5911" data-monke-id="5911" title="Monke #5911 — rank 95"><span class="msprite" style="--col:10;--row:59"></span></a>
+    <a class="monke-tile bid" href="#monke-9172" data-monke-id="9172" title="Monke #9172 — rank 81"><span class="msprite" style="--col:71;--row:91"></span></a>
+    <a class="monke-tile bid" href="#monke-6236" data-monke-id="6236" title="Monke #6236 — rank 85"><span class="msprite" style="--col:35;--row:62"></span></a>
+    <a class="monke-tile bid" href="#monke-997" data-monke-id="997" title="Monke #997 — rank 68"><span class="msprite" style="--col:96;--row:9"></span></a>
+    <a class="monke-tile bid" href="#monke-7932" data-monke-id="7932" title="Monke #7932 — rank 78"><span class="msprite" style="--col:31;--row:79"></span></a>
+    <a class="monke-tile bid" href="#monke-3798" data-monke-id="3798" title="Monke #3798 — rank 79"><span class="msprite" style="--col:97;--row:37"></span></a>
+    <a class="monke-tile bid" href="#monke-6489" data-monke-id="6489" title="Monke #6489 — rank 86"><span class="msprite" style="--col:88;--row:64"></span></a>
+    <a class="monke-tile bid" href="#monke-8812" data-monke-id="8812" title="Monke #8812 — rank 5"><span class="msprite" style="--col:11;--row:88"></span></a>
+    <a class="monke-tile bid" href="#monke-9261" data-monke-id="9261" title="Monke #9261 — rank 89"><span class="msprite" style="--col:60;--row:92"></span></a>
+    <a class="monke-tile bid" href="#monke-2952" data-monke-id="2952" title="Monke #2952 — rank 102"><span class="msprite" style="--col:51;--row:29"></span></a>
+    <a class="monke-tile bid" href="#monke-794" data-monke-id="794" title="Monke #794 — rank 77"><span class="msprite" style="--col:93;--row:7"></span></a>
+    <a class="monke-tile bid" href="#monke-4825" data-monke-id="4825" title="Monke #4825 — rank 92"><span class="msprite" style="--col:24;--row:48"></span></a>
+    <a class="monke-tile bid" href="#monke-5567" data-monke-id="5567" title="Monke #5567 — rank 83"><span class="msprite" style="--col:66;--row:55"></span></a>
+  </div>
+</section>
+
+<section class="panel" id="auctions">
+  <h2><a href="#auctions">LIVE AUCTIONS</a></h2>
+  <p class="dim">no live auctions.</p>
+</section>
+
+<section class="panel" id="recent-transactions">
+  <h2><a href="#recents">RECENT TRANSACTIONS</a></h2>
+  <div class="monke-grid band" style="--cols: 8">
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-421" data-monke-id="421" title="Monke #421 — rank 4127">
+        <span class="msprite" style="--col:20;--row:4"></span>
+      </a>
+      <div class="tile-caption dim">transfer · 1h ago</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile sale" href="#monke-1227" data-monke-id="1227" title="Monke #1227 — rank 6111">
+        <span class="msprite" style="--col:26;--row:12"></span>
+      </a>
+      <div class="tile-caption dim">listed · 1h ago</div>
+      <div class="tile-caption">0.0285 BTC</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-9475" data-monke-id="9475" title="Monke #9475 — rank 1947">
+        <span class="msprite" style="--col:74;--row:94"></span>
+      </a>
+      <div class="tile-caption dim">sale · 1h ago</div>
+      <div class="tile-caption">0.0285 BTC</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile sale" href="#monke-1227" data-monke-id="1227" title="Monke #1227 — rank 6111">
+        <span class="msprite" style="--col:26;--row:12"></span>
+      </a>
+      <div class="tile-caption dim">sale · 1h ago</div>
+      <div class="tile-caption">0.0256 BTC</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-4499" data-monke-id="4499" title="Monke #4499 — rank 4700">
+        <span class="msprite" style="--col:98;--row:44"></span>
+      </a>
+      <div class="tile-caption dim">sale · 1h ago</div>
+      <div class="tile-caption">0.0254 BTC</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile bid" href="#bids" title="2 collection bids">
+        <span class="msprite" style="--col:3;--row:75"></span>
+      </a>
+      <div class="tile-caption dim">2 collection bids</div>
+      <div class="tile-caption">0.01 BTC</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-421" data-monke-id="421" title="Monke #421 — rank 4127">
+        <span class="msprite" style="--col:20;--row:4"></span>
+      </a>
+      <div class="tile-caption dim">sale · 3h ago</div>
+      <div class="tile-caption">0.0266 BTC</div>
+    </div>
+    <div class="monke-cell">
+      <a class="monke-tile none" href="#monke-116" data-monke-id="116" title="Monke #116 — rank 8942">
+        <span class="msprite" style="--col:15;--row:1"></span>
+      </a>
+      <div class="tile-caption dim">sale · 6h ago</div>
+      <div class="tile-caption">0.026 BTC</div>
+    </div>
+  </div>
+  <p class="dim" style="margin-top:14px;"><a href="#recents">48 events in the last 48 hours →</a></p>
+</section>
+
+<section class="panel" id="sales">
+  <h2><a href="#sales">SALES</a></h2>
+  <p>The average sale price of a Monke over the last year is
+    <strong>0.0367 BTC ($2,833)</strong>.</p>
+  <p>The total value of Monkes sold over the last year is
+    <strong>135.61 BTC ($10.5M)</strong>.</p>
+  <p class="dim">Showing most recent sales — <a href="#sales">see all 33226 →</a></p>
+  
+  <div class="monke-grid mini">
+    <a class="monke-tile" href="#monke-9475" data-monke-id="9475" title="Monke #9475 — rank 1947"><span class="msprite" style="--col:74;--row:94"></span></a>
+    <a class="monke-tile" href="#monke-1227" data-monke-id="1227" title="Monke #1227 — rank 6111"><span class="msprite" style="--col:26;--row:12"></span></a>
+    <a class="monke-tile" href="#monke-4499" data-monke-id="4499" title="Monke #4499 — rank 4700"><span class="msprite" style="--col:98;--row:44"></span></a>
+    <a class="monke-tile" href="#monke-421" data-monke-id="421" title="Monke #421 — rank 4127"><span class="msprite" style="--col:20;--row:4"></span></a>
+    <a class="monke-tile" href="#monke-116" data-monke-id="116" title="Monke #116 — rank 8942"><span class="msprite" style="--col:15;--row:1"></span></a>
+    <a class="monke-tile" href="#monke-346" data-monke-id="346" title="Monke #346 — rank 8178"><span class="msprite" style="--col:45;--row:3"></span></a>
+    <a class="monke-tile" href="#monke-8890" data-monke-id="8890" title="Monke #8890 — rank 3834"><span class="msprite" style="--col:89;--row:88"></span></a>
+    <a class="monke-tile" href="#monke-3539" data-monke-id="3539" title="Monke #3539 — rank 2008"><span class="msprite" style="--col:38;--row:35"></span></a>
+    <a class="monke-tile" href="#monke-5715" data-monke-id="5715" title="Monke #5715 — rank 7394"><span class="msprite" style="--col:14;--row:57"></span></a>
+    <a class="monke-tile" href="#monke-173" data-monke-id="173" title="Monke #173 — rank 7654"><span class="msprite" style="--col:72;--row:1"></span></a>
+    <a class="monke-tile" href="#monke-8751" data-monke-id="8751" title="Monke #8751 — rank 6836"><span class="msprite" style="--col:50;--row:87"></span></a>
+    <a class="monke-tile" href="#monke-5874" data-monke-id="5874" title="Monke #5874 — rank 3019"><span class="msprite" style="--col:73;--row:58"></span></a>
+  </div>
+</section>
+
+<section class="panel" id="rarity">
+  <h2><a href="#rarity">ALL MONKES</a></h2>
+  <p>See all <a href="#rarity">NodeMonkes here</a> — rarest first.</p>
+  <div class="monke-grid mini">
+    <a class="monke-tile" href="#monke-209" data-monke-id="209" title="Monke #209 — rank 1"><span class="msprite" style="--col:8;--row:2"></span></a>
+    <a class="monke-tile" href="#monke-7277" data-monke-id="7277" title="Monke #7277 — rank 2"><span class="msprite" style="--col:76;--row:72"></span></a>
+    <a class="monke-tile" href="#monke-3361" data-monke-id="3361" title="Monke #3361 — rank 3"><span class="msprite" style="--col:60;--row:33"></span></a>
+    <a class="monke-tile" href="#monke-4143" data-monke-id="4143" title="Monke #4143 — rank 4"><span class="msprite" style="--col:42;--row:41"></span></a>
+    <a class="monke-tile" href="#monke-8812" data-monke-id="8812" title="Monke #8812 — rank 5"><span class="msprite" style="--col:11;--row:88"></span></a>
+    <a class="monke-tile" href="#monke-4216" data-monke-id="4216" title="Monke #4216 — rank 6"><span class="msprite" style="--col:15;--row:42"></span></a>
+    <a class="monke-tile" href="#monke-9845" data-monke-id="9845" title="Monke #9845 — rank 7"><span class="msprite" style="--col:44;--row:98"></span></a>
+    <a class="monke-tile" href="#monke-399" data-monke-id="399" title="Monke #399 — rank 8"><span class="msprite" style="--col:98;--row:3"></span></a>
+    <a class="monke-tile" href="#monke-1249" data-monke-id="1249" title="Monke #1249 — rank 9"><span class="msprite" style="--col:48;--row:12"></span></a>
+    <a class="monke-tile" href="#monke-515" data-monke-id="515" title="Monke #515 — rank 10"><span class="msprite" style="--col:14;--row:5"></span></a>
+    <a class="monke-tile" href="#monke-10" data-monke-id="10" title="Monke #10 — rank 11"><span class="msprite" style="--col:9;--row:0"></span></a>
+    <a class="monke-tile" href="#monke-8183" data-monke-id="8183" title="Monke #8183 — rank 12"><span class="msprite" style="--col:82;--row:81"></span></a>
+    <a class="monke-tile" href="#monke-9293" data-monke-id="9293" title="Monke #9293 — rank 13"><span class="msprite" style="--col:92;--row:92"></span></a>
+    <a class="monke-tile" href="#monke-1603" data-monke-id="1603" title="Monke #1603 — rank 14"><span class="msprite" style="--col:2;--row:16"></span></a>
+    <a class="monke-tile" href="#monke-9255" data-monke-id="9255" title="Monke #9255 — rank 15"><span class="msprite" style="--col:54;--row:92"></span></a>
+    <a class="monke-tile" href="#monke-8227" data-monke-id="8227" title="Monke #8227 — rank 16"><span class="msprite" style="--col:26;--row:82"></span></a>
+  </div>
+</section>
+
+<section class="panel" id="how-to-trade">
+  <h2>HOW TO TRADE</h2>
+  <ol>
+    <li><strong>BROWSE.</strong> Every monke, trait and rank is one click deep — try Clean, rank:1 or attributes.</li>
+    <li><strong>CONNECT.</strong> Unisat, Xverse, Leather or OKX — the site only passes PSBTs to your wallet; keys never leave it.</li>
+    <li><strong>LIST / BUY / BID.</strong> Listings are seller-signed PSBTs; buys settle as validated transaction packages. Bids are fully-signed purchase transactions the seller can accept at any time — no escrow, ever.</li>
+    <li><strong>SETTLE ON-CHAIN.</strong> Bitcoin is the source of truth. The moment a trade confirms, ownership here follows the chain.</li>
+  </ol>
+</section>
+
+<section class="panel" id="faq">
+  <h2>FAQ</h2>
+  <p class="kv"><span class="k">Is this custodial?</span> No. The server indexes and coordinates; it can never move your coins or monkes.</p>
+  <p class="kv"><span class="k">What are the fees?</span> Maker 0% / taker 0% — you pay only Bitcoin network fees.</p>
+  <p class="kv"><span class="k">What about front-running?</span> Offers and bids commit both parties to the exact transaction up front — per-flow guarantees on the trust-model page.</p>
+  <p><a href="#faq">full FAQ →</a></p>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>MONKEDEX — NODEMONKES DEX ON BITCOIN</span>
+    <span class="dim">non-custodial · psbt native · bitcoin settled</span>
+    <nav>
+      <a href="#dex">TRUST MODEL</a>
+      <a href="#faq">FAQ</a>
+      <a href="#privacy">PRIVACY</a>
+      <a href="#recents">HISTORY</a>
+      <a href="#topsales">TOP SALES</a>
+      <a href="#crt" onclick="event.preventDefault(); toggleCRT();">CRT FILTER</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Modals -->
+
+<!-- Wallet Connect Modal -->
+<div id="wallet-modal" class="modal-backdrop" hidden>
+  <div class="modal">
+    <h3>SELECT BITCOIN WALLET</h3>
+    <div class="modal-body">
+      <button type="button" class="wallet-option" data-provider="Unisat">
+        <span>UNISAT WALLET</span>
+        <span class="dim">Taproot Native</span>
+      </button>
+      <button type="button" class="wallet-option" data-provider="Xverse">
+        <span>XVERSE WALLET</span>
+        <span class="dim">Mobile & Extension</span>
+      </button>
+      <button type="button" class="wallet-option" data-provider="Leather">
+        <span>LEATHER (HIRO)</span>
+        <span class="dim">Bitcoin & Ordinals</span>
+      </button>
+      <button type="button" class="wallet-option" data-provider="OKX">
+        <span>OKX WALLET</span>
+        <span class="dim">Multi-chain</span>
+      </button>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" onclick="closeWalletModal()">CANCEL</button>
+    </div>
+  </div>
+</div>
+
+<!-- Monke Detail Modal -->
+<div id="monke-modal" class="modal-backdrop" hidden>
+  <div class="modal">
+    <h3 id="modal-monke-id">MONKE #209</h3>
+    <div class="modal-body">
+      <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:14px; align-items:center;">
+        <div style="width:112px; height:112px; background:var(--tile-none); border:1px solid var(--border); overflow:hidden;">
+          <span id="modal-monke-art" class="msprite" style="--s:112px; --col:8; --row:2;"></span>
+        </div>
+        <div style="flex:1; min-width:180px;">
+          <div id="modal-monke-rank" style="color:var(--accent); font-size:18px; margin-bottom:6px;">RANK 1 / 10,000</div>
+          <div id="modal-monke-price" style="font-size:16px; margin-bottom:8px;">0.0285 BTC ($2,198)</div>
+          <div class="dim" style="font-size:13px;">On-chain Ordinals Inscription</div>
+        </div>
+      </div>
+      <div id="modal-monke-traits" style="background:var(--bg); border:1px solid var(--border); padding:10px; margin-bottom:12px;"></div>
+    </div>
+    <div class="modal-actions">
+      <button type="button" id="modal-buy-btn" class="btn">BUY NOW</button>
+      <button type="button" id="modal-watch-btn" class="btn btn-ghost">☆ WATCHLIST</button>
+      <button type="button" class="btn btn-ghost" onclick="closeMonkeDetail()">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<!-- Watchlist Modal -->
+<div id="watchlist-modal" class="modal-backdrop" hidden>
+  <div class="modal">
+    <h3>WATCHLIST</h3>
+    <div class="modal-body">
+      <div id="watchlist-items"></div>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" onclick="closeWatchlistModal()">CLOSE</button>
+    </div>
+  </div>
+</div>
+
+<!-- Migrate Modal -->
+<div id="migrate-modal" class="modal-backdrop" hidden>
+  <div class="modal">
+    <h3>MIGRATE NODEMONKES</h3>
+    <div class="modal-body">
+      <p>Migrate legacy Taproot inscriptions to the optimized PSBT-native Monkedex custody protocol.</p>
+      <div id="migrate-status-box" style="background:var(--bg); border:1px solid var(--border); padding:12px; margin:12px 0;">
+        <div class="kv"><span class="k">WALLET:</span> <span id="migrate-wallet-status">NOT CONNECTED</span></div>
+        <div class="kv"><span class="k">FEE RATE:</span> 1.2 sats/vB (Economy)</div>
+        <div class="kv"><span class="k">ELIGIBLE ASSETS:</span> <span id="migrate-asset-count">0 Detected</span></div>
+      </div>
+      <p class="dim" style="font-size:13px;">Migration generates a non-custodial batch PSBT transaction signed with your connected wallet. Your keys never leave your custody.</p>
+    </div>
+    <div class="modal-actions">
+      <button type="button" id="migrate-confirm-btn" class="btn">START MIGRATION</button>
+      <button type="button" class="btn btn-ghost" onclick="closeMigrateModal()">CANCEL</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
